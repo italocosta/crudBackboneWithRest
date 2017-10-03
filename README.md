@@ -1,13 +1,18 @@
 # README #
 
-### Para que? ###
+### For what ? ###
 
-* Para ter um serviço rest em java o mais rápido possivel.
+* To have a rest service in Java quickly.
 
-### Como subir o serviço? ###
+### How up the service ? ###
 
-* Clone o projeto.
-* rode o comando `mvn eclipse:eclipse`.
-* importe no eclipse.
-* adicione a um tomcat(no proprio eclipse)
-* rode-o no browser acessando a utl: http://localhost:8080/simple_rest. Deverá aparecer o index.html com o texto "Seja bem vindo ao sistema..."
+* Clone the project.
+* run command `mvn eclipse:eclipse`.
+* import in eclipse with git project.
+* add project to tomcat(in eclipse itself)
+* run on browser accessing the url: http://localhost:8080/simple_rest.
+* You should see the index.html with text "Seja bem vindo ao sistema..."
+
+### Credit ###
+
+* https://github.com/robsonmrsp
