@@ -1,20 +1,188 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-<link href="css/style.css" rel="stylesheet">
-<script src="js/lib/jquery.js"></script>
-<script src="js/lib/underscore.js"></script>
-<script src="js/lib/backbone.js"></script>
-<script src="js/main.js"></script>
-<script src=""></script>
+<meta charset="utf-8">
+<title>Crud Backbone</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet"> -->
+<link href="css/styles.css" rel="stylesheet">
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+
 </head>
+
 <body>
-<h1> Seja bem vindo ao sistema...</h1>
-	<div class="container" id="container">
-		<div class="main-content"></div>
+
+
+
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">CrudBackbone</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="dropdown product-menu active">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							Product
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#app/product">View Products</a>
+							</li>
+							<li>
+								<a href="#app/productAdd">Add Product</a>
+							</li>
+						</ul>
+					</li>
+					<li class="person-menu">
+						<a href="#app/person">Person</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+
+
+	<div class="container">
+
+		<div class="row">
+			<div id="content"></div>
+		</div>
+
+		<hr>
+
+		<footer>
+			<p>
+				&copy; App Backbone SPA Crud.
+				<a href="http://github.com/italocosta">Follow me</a>
+				on Github.
+			</p>
+		</footer>
+
 	</div>
+
+	<script type="text/template" id="ProductView">
+		<h2>Products</h2>
+	
+	
+		<div class="lista-produto-container"></div>
+	</script>
+	<script type="text/template" id="ProductFormView">
+		<div class="col-lg-6">
+			<div class="row">
+				<div class="form-group col-lg-2">
+					<label for="id">ID</label>
+					<input type="number" class="form-control" id="id"  data-bind="value:id,events:['keyup']" />
+				</div>
+				<div class="form-group col-lg-10">
+					<label for="descricao">Descrição</label>
+					<input type="text" class="form-control" id="descricao" data-bind="value:descricao,events:['keyup']" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="categoria">Categoria</label>
+				<input type="text" class="form-control" id="categoria" data-bind="value:categoria,events:['keyup']" />
+			</div>
+			<div class="row">
+				<div class="form-group col-lg-6">
+					<label for="preco">Preço</label>
+					<input type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="preco"
+						data-bind="value:preco,events:['keyup']" />
+				</div>
+				<div class="form-group col-lg-6">
+					<label for="quantidade">Quantidade</label>
+					<input type="number" min="0" step="1" class="form-control" id="quantidade" data-bind="value:quantidade,events:['keyup']" />
+				</div>
+			</div>
+			<button class="btn btn-success pull-right btn-save">Salvar</button>
+			<a href="#app/product" class="btn btn-default btn-cancel"> Cancelar </a>
+		</div>
+	</script>
+
+
+
+	<script type="text/template" id="tableProduct">
+		<div class="col-lg-12">
+			<table id="tableProduct" class="table table-condensed table-striped">
+				<thead>
+					<th>ID</th>
+					<th>Description</th>
+					<th>Category</th>
+					<th>Price</th>
+					<th>Quantity</th>
+				</thead>
+				<tbody class="linhas-produto-container"></tbody>
+			</table>
+		</div>
+	</script>
+
+	<script type="text/template" id="ProductTableItemView">
+		<td><%= id %></td>
+		<td><%= descricao %></td>
+		<td><%= categoria %></td>
+		<td><%= preco %></td>
+		<td><%= quantidade %></td>
+		<td><a href="#app/product/<%= id %>" class="btn btn-info btn-xs">edit</a></td>
+		<td><button class="btn btn-danger btn-xs btn-delete-product">delete</button></td>
+	</script>
+
+	<script type="text/template" id="PersonView">
+		<h1>PersonView</h1>
+	</script>
+
+	<script src="js/lib/jquery-1.9.1.min.js"></script>
+	<script src="js/lib/underscore-min.js"></script>
+	<script src="js/lib/backbone-min.js"></script>
+	<script src="js/lib/backbone.epoxy.js"></script>
+	<!-- <script src="bootstrap/js/bootstrap.js"></script -->
+	>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<script src="js/app.js"></script>
+	<script src="js/views/personView.js"></script>
+	<script src="js/views/productView.js"></script>
+	<script src="js/models/productModel.js"></script>
+	<script src="js/models/personModel.js"></script>
+
+	<!-- SELECT ONE (AND ONLY ONE) OF THE DATA PERSISTENCE SOLUTIONS BELOW -->
+
+	<!-- Uncomment the script below to access the application data using an in-memory data store -->
+	<script src="js/models/model-in-memory.js"></script>
+
+	<!-- Uncomment the script below to access the application data using RESTful services. Open model-rest.js and adjust the URL attributes to reflect your URL endpoints. -->
+	<!--<script src="js/models/model-rest.js"></script>-->
+
+	<!-- Uncomment the script below to access the application data using RESTful services with JSONP. Open model-rest.js and adjust the URL attributes to reflect your REST endpoints. -->
+	<!--<script src="js/models/model-rest-jsonp.js"></script>-->
+
+	<!-- Uncomment the two scripts below to use Parse.com as the data persistence layer. -->
+	<!--<script src="lib/parse-1.2.2.min.js"></script>-->
+	<!--<script src="js/models/model-parse-com.js"></script>-->
+
 </body>
 </html>
