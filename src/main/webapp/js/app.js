@@ -9,12 +9,12 @@ app.selectMenuItem = function(menuItem) {
 		$('.' + menuItem).addClass('active');
 	}
 };
-app.getTemplate = function(nome) {
-	var that = this;
-	return $.get('templates/' + nome + '.html', function(data) {
-		template = _.template(data, {});
-		this.$el.html(template(that.model.toJSON()));
-	}, 'html');
+app.goListProduct = function() {
+	var content = $('#content');
+	app.productView = new app.ProductView();
+	app.productView.render();
+	content.html(app.productView.el);
+	app.selectMenuItem('product-menu');
 }
 app.Router = Backbone.Router.extend({
 
@@ -39,10 +39,7 @@ app.Router = Backbone.Router.extend({
 		app.selectMenuItem('person-menu');
 	},
 	product : function() {
-		app.productView = new app.ProductView();
-		app.productView.render();
-		this.$content.html(app.productView.el);
-		app.selectMenuItem('product-menu');
+		app.goListProduct();
 	},
 	productAdd : function() {
 		var that = this;

@@ -1,5 +1,28 @@
-app.ProductView = Backbone.View.extend({
+app.ProductView = Backbone.Epoxy.View.extend({
 	template : _.template($('#ProductView').html()),
+	initialize: function() {
+		this.model = new app.Product();
+	},
+	events: {
+		'click .btn-search': 'search'
+	},
+	search: function() {
+		var that = this;
+		this.collectionPrincipal = new app.Products();
+		this.collectionPrincipal.search({
+			data: this.model,
+			success: function() {
+				var productTableView = new app.ProductTableView({
+					collection : that.collectionPrincipal
+				});
+				
+				that.$el.find(".lista-produto-container").html(productTableView.render().el);
+			},
+			error: function() {
+				
+			}
+		});
+	},
 	render : function() {
 		var that = this;
 		this.$el.html(this.template());
@@ -18,6 +41,7 @@ app.ProductView = Backbone.View.extend({
 		});
 
 
+		this.applyBindings();
 		return this;
 	}
 });

@@ -5,23 +5,23 @@ import java.math.BigDecimal;
 public class Produto {
 
 	private Integer id;
-	private String descricao;
-	private String categoria;
-	private BigDecimal preco;
-	private Integer quantidade;
+	private String description;
+	private String category;
+	private BigDecimal price;
+	private Integer quantity;
 
 	public Produto() {
 
 	}
 
-	public Produto(Integer id, String descricao, String categoria,
-			BigDecimal preco, Integer quantidade) {
+	public Produto(Integer id, String description, String category,
+			BigDecimal price, Integer quantity) {
 		super();
 		this.id = id;
-		this.descricao = descricao;
-		this.categoria = categoria;
-		this.preco = preco;
-		this.quantidade = quantidade;
+		this.description = description;
+		this.category = category;
+		this.price = price;
+		this.quantity = quantity;
 	}
 
 	public Integer getId() {
@@ -31,36 +31,38 @@ public class Produto {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getDescricao() {
-		return descricao;
+
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getCategoria() {
-		return categoria;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
-	public BigDecimal getPreco() {
-		return preco;
+	public BigDecimal getPrice() {
+		return price;
 	}
 
-	public void setPreco(BigDecimal preco) {
-		this.preco = preco;
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 
-	public Integer getQuantidade() {
-		return quantidade;
+	public Integer getQuantity() {
+		return quantity;
 	}
 
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
+	
 
 }

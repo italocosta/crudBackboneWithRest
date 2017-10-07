@@ -3,8 +3,10 @@ package br.com.mr.exemplo;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -25,6 +27,43 @@ public class ProdutoResources {
 		PRODUTOS.add(new Produto(2, "Procesador Intel Dual Core", "Informática", new BigDecimal(150.55), 15));
 		PRODUTOS.add(new Produto(3, "Sabone Palmolivia", "Higiene", new BigDecimal(5.50), 100));
 		PRODUTOS.add(new Produto(4, "Notebool LG E500", "Informática", new BigDecimal(1700.50), 5));
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("{id}/{description}/{category}/{price}/{quantity}")
+	public Response pesquisa(@PathParam("id") String id, @PathParam("description") String descricao,
+			@PathParam("category") String categoria,@PathParam("price") String preco,
+			@PathParam("quantity") String quantidade) {
+		
+		List<Produto> retorno = new ArrayList<Produto>();
+		boolean add = false;
+		for (Produto prod : PRODUTOS) {
+			if (!id.equals("null") && prod.getId().compareTo(Integer.parseInt(id))==0 || id.equals("null"))
+				add = true;
+			else
+				add = false;
+			if (!descricao.equals("null") && prod.getDescription().toUpperCase().startsWith(descricao.toUpperCase()) || descricao.equals("null") && add)
+				add = true;
+			else
+				add = false;
+			if (!categoria.equals("null") && prod.getCategory().toUpperCase().startsWith(categoria.toUpperCase()) || categoria.equals("null") && add)
+				add = true;
+			else
+				add = false;
+			if (!preco.equals("null") && prod.getPrice().compareTo(BigDecimal.valueOf(Double.parseDouble(preco)))==0 || preco.equals("null") && add)
+				add = true;
+			else
+				add = false;
+			if (!quantidade.equals("null") && prod.getQuantity().compareTo(Integer.parseInt(quantidade))==0 || quantidade.equals("null") && add)
+				add = true;
+			else
+				add = false;
+			if (add)
+				retorno.add(prod);
+		}
+		return Response.ok().entity(retorno).build();
 	}
 
 	@GET
@@ -62,10 +101,10 @@ public class ProdutoResources {
 	public Response update(@PathParam("id") Integer id, Produto produto) {
 		for (Produto prod : PRODUTOS) {
 			if (prod.getId().equals(produto.getId())) {
-				prod.setCategoria(produto.getCategoria());
-				prod.setDescricao(produto.getDescricao());
-				prod.setPreco(produto.getPreco());
-				prod.setQuantidade(produto.getQuantidade());
+				prod.setCategory(produto.getCategory());
+				prod.setDescription(produto.getDescription());
+				prod.setPrice(produto.getPrice());
+				prod.setQuantity(produto.getQuantity());
 				return Response.ok().entity(prod).build();
 			}
 		}
