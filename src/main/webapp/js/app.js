@@ -29,6 +29,13 @@ app.goListPerson = function() {
 	content.html(app.personView.el);
 	app.selectMenuItem('person-menu');
 };
+app.goPage= function(hash,target) {
+	if(target){
+		window.open(hash,'_blank')
+	}else{
+		window.location.hash = hash;
+	}
+};
 app.Router = Backbone.Router.extend({
 
 	routes : {

@@ -102,7 +102,6 @@ app.PersonTableItemView = Backbone.View.extend({
 app.PersonFormView = Backbone.Epoxy.View.extend({
 	template : _.template($("#PersonFormView").html()),
 	initialize : function(opt) {
-		this.router = new app.Router();
 	},
 	events : {
 		'click .btn-save': 'clickSave',
@@ -111,7 +110,7 @@ app.PersonFormView = Backbone.Epoxy.View.extend({
 		var that = this;
 		this.model.save({},{
 			success: function() {
-				that.router.navigate("app/person", true);
+				app.goPage("app/person");
 			}
 		});
 	},

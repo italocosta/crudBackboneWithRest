@@ -102,7 +102,6 @@ app.ProductTableItemView = Backbone.View.extend({
 app.ProductFormView = Backbone.Epoxy.View.extend({
 	template : _.template($("#ProductFormView").html()),
 	initialize : function(opt) {
-		this.router = new app.Router();
 	},
 	events : {
 		'click .btn-save': 'clickSave',
@@ -111,7 +110,7 @@ app.ProductFormView = Backbone.Epoxy.View.extend({
 		var that = this;
 		this.model.save({},{
 			success: function() {
-				that.router.navigate("app/product", true);
+				app.goPage("app/product");
 			}
 		});
 	},
