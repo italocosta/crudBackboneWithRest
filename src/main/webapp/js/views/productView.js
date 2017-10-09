@@ -22,7 +22,7 @@ app.ProductView = Backbone.Epoxy.View.extend({
 					collection : that.collectionPrincipal
 				});
 				
-				that.$el.find(".lista-produto-container").html(productTableView.render().el);
+				that.$el.find(".list-product-container").html(productTableView.render().el);
 			},
 			error: function() {
 				
@@ -39,7 +39,7 @@ app.ProductView = Backbone.Epoxy.View.extend({
 					collection : that.collectionPrincipal,
 				});
 				
-				that.$el.find(".lista-produto-container").html(productTableView.render().el);
+				that.$el.find(".list-product-container").html(productTableView.render().el);
 			},
 			error: function() {
 				
@@ -62,7 +62,7 @@ app.ProductTableView = Backbone.View.extend({
 	render : function() {
 		var that = this;
 		this.$el.html(this.template());
-		this.$el.find('.linhas-produto-container').html("");
+		this.$el.find('.rows-product-container').html("");
 
 		this.collection.each(function(productModel) {
 
@@ -70,7 +70,7 @@ app.ProductTableView = Backbone.View.extend({
 				model : productModel,
 			});
 
-			that.$el.find('.linhas-produto-container').append(novaLinha.render().$el);
+			that.$el.find('.rows-product-container').append(novaLinha.render().$el);
 		})
 		return this;
 	}

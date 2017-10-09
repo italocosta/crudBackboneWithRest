@@ -1,20 +1,30 @@
 package br.com.mr.exemplo;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Pessoa {
 	private Integer id;
 	private String cpf;
-	private String nome;
-	private String dataNascimento;
+	private String name;
+
+	private String dateBirthday;
 
 	public Pessoa() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Pessoa(Integer id, String cpf, String nome) {
+	public Pessoa(Integer id, String cpf, String name) {
 		this.id = id;
 		this.cpf = cpf;
-		this.nome = nome;
+		this.name = name;
+	}
+
+	public Pessoa(Integer id, String cpf, String name, String dateBirthday) {
+		this.id = id;
+		this.cpf = cpf;
+		this.name = name;
+		this.dateBirthday = dateBirthday;
 	}
 
 	public String getCpf() {
@@ -25,14 +35,6 @@ public class Pessoa {
 		this.cpf = cpf;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -41,12 +43,20 @@ public class Pessoa {
 		this.id = id;
 	}
 
-	public String getDataNascimento() {
-		return dataNascimento;
+	public String getName() {
+		return name;
 	}
 
-	public void setDataNascimento(String dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDateBirthday() {
+		return dateBirthday;
+	}
+
+	public void setDateBirthday(String dateBirthday) {
+		this.dateBirthday = dateBirthday;
 	}
 
 }
