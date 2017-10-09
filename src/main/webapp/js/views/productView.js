@@ -4,7 +4,13 @@ app.ProductView = Backbone.Epoxy.View.extend({
 		this.model = new app.Product();
 	},
 	events: {
-		'click .btn-search': 'search'
+		'click .btn-search': 'search',
+		'keyup .panel-body :input': 'searchKey'
+	},
+	searchKey: function(e) {
+		if(e.which === 13){
+			this.search();
+		}
 	},
 	search: function() {
 		var that = this;

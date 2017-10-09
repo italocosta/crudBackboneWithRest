@@ -37,7 +37,6 @@ app.Products = Backbone.Collection.extend({
 		              '/'+this.getValueNull(data.category)+
 		              '/'+this.getValueNull(data.price)+
 		              '/'+this.getValueNull(data.quantity);
-		console.log(options.url);
 		options.data = null;
 
 		return Backbone.Collection.prototype.fetch.call(this, options);

@@ -49,7 +49,7 @@ app.Router = Backbone.Router.extend({
 		});
 		app.productFormView.render();
 		app.productFormView.$el.find('#id').parent().remove();
-		app.productFormView.$el.find('#descricao').parent().removeClass('col-lg-10').addClass('col-lg-12');
+		app.productFormView.$el.find('#description').parent().removeClass('col-lg-10').addClass('col-lg-12');
 		that.$content.html(app.productFormView.el);
 	},
 	productEdit : function(id) {

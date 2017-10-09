@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -40,26 +39,44 @@ public class ProdutoResources {
 		List<Produto> retorno = new ArrayList<Produto>();
 		boolean add = false;
 		for (Produto prod : PRODUTOS) {
-			if (!id.equals("null") && prod.getId().compareTo(Integer.parseInt(id))==0 || id.equals("null"))
-				add = true;
-			else
-				add = false;
-			if (!descricao.equals("null") && prod.getDescription().toUpperCase().startsWith(descricao.toUpperCase()) || descricao.equals("null") && add)
-				add = true;
-			else
-				add = false;
-			if (!categoria.equals("null") && prod.getCategory().toUpperCase().startsWith(categoria.toUpperCase()) || categoria.equals("null") && add)
-				add = true;
-			else
-				add = false;
-			if (!preco.equals("null") && prod.getPrice().compareTo(BigDecimal.valueOf(Double.parseDouble(preco)))==0 || preco.equals("null") && add)
-				add = true;
-			else
-				add = false;
-			if (!quantidade.equals("null") && prod.getQuantity().compareTo(Integer.parseInt(quantidade))==0 || quantidade.equals("null") && add)
-				add = true;
-			else
-				add = false;
+			try {
+				if(!id.equals("null") && prod.getId().compareTo(Integer.parseInt(id))!=0)
+					continue;
+				if (!id.equals("null") && prod.getId().compareTo(Integer.parseInt(id))==0 || id.equals("null"))
+					add = true;
+				else
+					add = false;
+				
+				if(!descricao.equals("null") && !prod.getDescription().toUpperCase().startsWith(descricao.toUpperCase()))
+					continue;
+				if (prod.getDescription().toUpperCase().startsWith(descricao.toUpperCase()) || descricao.equals("null") && add)
+					add = true;
+				else
+					add = false;
+				
+				if(!categoria.equals("null") && !prod.getCategory().toUpperCase().startsWith(categoria.toUpperCase()))
+					continue;
+				if (prod.getCategory().toUpperCase().startsWith(categoria.toUpperCase()) || categoria.equals("null") && add)
+					add = true;
+				else
+					add = false;
+				
+				if(!preco.equals("null") && prod.getPrice().compareTo(BigDecimal.valueOf(Double.parseDouble(preco)))!=0)
+					continue;
+				if (!preco.equals("null") && prod.getPrice().compareTo(BigDecimal.valueOf(Double.parseDouble(preco)))==0 || preco.equals("null") && add)
+					add = true;
+				else
+					add = false;
+				
+				if(!quantidade.equals("null") && prod.getQuantity().compareTo(Integer.parseInt(quantidade))!=0)
+					continue;
+				if (!quantidade.equals("null") && prod.getQuantity().compareTo(Integer.parseInt(quantidade))==0 || quantidade.equals("null") && add)
+					add = true;
+				else
+					add = false;
+			}catch(Exception e) {
+				continue;
+			}
 			if (add)
 				retorno.add(prod);
 		}
