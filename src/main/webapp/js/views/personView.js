@@ -109,7 +109,6 @@ app.PersonFormView = Backbone.Epoxy.View.extend({
 	},
 	clickSave : function() {
 		var that = this;
-		this.model.set('dateBirthday',this.model.get('dateBirthday').replaceAll('/','.'));
 		this.model.save({},{
 			success: function() {
 				that.router.navigate("app/person", true);
