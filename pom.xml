@@ -156,23 +156,6 @@
 				<version>2.3</version>
 				<executions>
 					<execution>
-						<id>integration-test</id>
-						<goals>
-							<goal>integration-test</goal>
-						</goals>
-						<configuration>
-							<systemPropertyVariables>
-								<service.url>http://localhost:${test.server.port}/jaxrs-service</service.url>
-							</systemPropertyVariables>
-						</configuration>
-					</execution>
-					<execution>
-						<id>verify</id>
-						<goals>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-					<execution>
 						<phase>package</phase>
 						<goals>
 							<goal>copy</goal>
